@@ -1,4 +1,5 @@
 import telebot
+from telebot import types
 from flask import Flask
 import random
 import os
@@ -75,6 +76,29 @@ def run():
 def keep_alive():
     t = Thread(target=run)
     t.start()
+    # --- КНОПКИ В МЕНЮ ---
+
+@bot.message_handler(commands=['menu'])
+def show_menu(message):
+    markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
+    btn_cat = types.KeyboardButton('🐈 Котик')
+    btn_easter = types.KeyboardButton('🌑 Пасхалка')
+    markup.add(btn_cat, btn_easter)
+    bot.send_message(message.chat.id, "Выбери действие:", reply_markup=markup)
+
+# Обработка нажатий на кнопки
+@bot.message_handler(func=lambda message: message.text == '🐈 Котик')
+def btn_cat_clicked(message):
+    # Убираем кнопки и отправляем котика
+    bot.send_message(message.chat.id, "Секунду, ищу котика...", reply_markup=types.ReplyKeyboardRemove())
+    send_cat(message)
+
+@bot.message_handler(func=lambda message: message.text == '🌑 Пасхалка')
+def btn_easter_clicked(message):
+    # Убираем кнопки и отправляем пасхалку
+    bot.send_message(message.chat.id, "Вызываю тьму...", reply_markup=types.ReplyKeyboardRemove())
+    easter_egg(message)
+# --------------------
 
 if __name__ == '__main__':
     keep_alive()
