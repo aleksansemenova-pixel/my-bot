@@ -50,6 +50,9 @@ def easter_egg(message):
 def echo_all(message):
     text = message.text.lower()
     
+        if text.startswith('/'):
+        return
+    
     if "привет" in text:
         bot.reply_to(message, "И тебе привет, зачем пожаловал?.")
     elif "как дела" in text:
