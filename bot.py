@@ -25,10 +25,21 @@ facts = [
     "Усы помогают котам ориентироваться в пространстве."
 ]
 
-# Команда /start
+# Команда /start (выдает текст и показывает кнопки)
 @bot.message_handler(commands=['start'])
 def start(message):
-    bot.send_message(message.chat.id, random.choice(greetings))
+    markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
+    btn_cat = types.KeyboardButton('🐈 Котик')
+    btn_easter = types.KeyboardButton('🌑 Пасхалка')
+    markup.add(btn_cat, btn_easter)
+    
+    text = "Могу прислать фото котиков или пасхалку.\nДля этого нажмите на кнопки внизу (или напишите /menu)"
+    bot.send_message(message.chat.id, text, reply_markup=markup)
+
+# Команда /help
+@bot.message_handler(commands=['help'])
+def help_command(message):
+    bot.send_message(message.chat.id, "Я бот-секретарь NighttimeBastard.\n\nМои команды:\n/start - Запустить меня\n/menu - Показать кнопки\n/help - Эта помощь")
 
 # Команда /cat (отправляет картинку и случайный факт)
 @bot.message_handler(commands=['cat'])
