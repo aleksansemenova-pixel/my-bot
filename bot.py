@@ -50,11 +50,11 @@ def easter_egg(message):
 def echo_all(message):
     text = message.text.lower()
     
-        if text.startswith('/'):
+    if text.startswith('/'):
         return
-    
+        
     if "привет" in text:
-        bot.reply_to(message, "И тебе привет, зачем пожаловал?.")
+        bot.reply_to(message, "И тебе привет, зачем пожаловал?")
     elif "как дела" in text:
         bot.reply_to(message, "А я собираю данные... Шучу. Всё отлично!")
     elif "ты кто" in text:
@@ -63,7 +63,6 @@ def echo_all(message):
         bot.reply_to(message, 'Послание от вашего котика: "Я люблю тебя, мой мальчик" ❤️')
     else:
         bot.reply_to(message, "Я тебя услышал, но пока не знаю, что ответить. Напиши /help")
-
 # Запуск бота
 from threading import Thread
 
