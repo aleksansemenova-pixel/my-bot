@@ -77,9 +77,7 @@ def keep_alive():
     t.start()
 
 if __name__ == '__main__':
-        keep_alive()
-    
+    keep_alive()
     bot_thread = Thread(target=bot.infinity_polling)
     bot_thread.start()
-    
-    print("Бот запущен и слушает сообщения...")
+print("Бот запущен и слушает сообщения...")
